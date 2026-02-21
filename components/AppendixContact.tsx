@@ -18,20 +18,20 @@ export default function AppendixContact() {
   return (
     <section
       id="contact"
-      className={`min-h-screen py-24 md:py-32 flex flex-col items-center px-6 md:px-12 lg:px-24 transition-colors duration-300 ${isDark ? "bg-black text-white" : "bg-white text-black"}`}
+      className={`min-h-screen py-24 md:py-15 flex flex-col items-center px-6 md:px-12 lg:px-24 transition-colors duration-300 ${isDark ? "bg-black text-white" : "bg-white text-black"}`}
     >
-      <div className="w-full max-w-[1500px] flex flex-col relative">
+      <div className="w-full max-w-[1800px] flex flex-col relative">
 
         {/* 1. Header Block (Centered, Sparse) */}
-        <div className="flex flex-col items-center justify-center mb-16 md:mb-24">
+        <div className="flex flex-col items-start justify-start mb-10 md:mb-18">
           <h2
-            className="text-6xl md:text-8xl lg:text-[120px] font-normal tracking-tight"
+            className="text-4xl md:text-6xl lg:text-[120px] font-normal tracking-tight ml-10"
             style={{ fontFamily: "'Italiana', serif" }}
           >
             Appendix IV
           </h2>
           <p
-            className="text-xl md:text-2xl lg:text-3xl font-light italic mt-4 md:mt-6 opacity-80"
+            className="text-xl md:text-2xl lg:text-3xl font-light italic mt-4 md:mt-6 opacity-80 ml-10"
             style={{ fontFamily: "'Arapey', serif" }}
           >
             On Professional Correspondence

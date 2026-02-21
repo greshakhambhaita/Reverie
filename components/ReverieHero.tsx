@@ -2,16 +2,151 @@
 
 import { useTheme } from "@/contexts/ThemeContext";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import rough from "roughjs";
+
+// Draws a rough ellipse and returns an array of SVG path descriptors
+function getRoughEllipsePaths(
+  cx: number,
+  cy: number,
+  w: number,
+  h: number,
+  isDark: boolean
+) {
+  const gen = rough.generator();
+  const shape = gen.ellipse(cx, cy, w, h, {
+    roughness: 2.2,
+    strokeWidth: 1.4,
+    stroke: isDark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.75)",
+    fill: "none",
+    seed: 42,
+  });
+  return gen.toPaths(shape);
+}
+
+function RoughCircle({
+  targetRef,
+  containerRef,
+  isDark,
+  trigger,
+}: {
+  targetRef: React.RefObject<HTMLSpanElement | null>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
+  isDark: boolean;
+  trigger: boolean;
+}) {
+  const pathRef = useRef<SVGPathElement>(null);
+  const [pathData, setPathData] = useState<{ d: string; stroke: string }[]>([]);
+  const [svgBox, setSvgBox] = useState({ w: 0, h: 0 });
+  const [drawn, setDrawn] = useState(false);
+
+  useEffect(() => {
+    if (!trigger) {
+      setDrawn(false);
+      setPathData([]);
+      return;
+    }
+
+    if (!targetRef.current || !containerRef.current) return;
+
+    const spanRect = targetRef.current.getBoundingClientRect();
+    const containerRect = containerRef.current.getBoundingClientRect();
+
+    const padX = 40;
+    const padY = 10;
+    const cx = spanRect.left - containerRect.left + spanRect.width / 2;
+    const cy = spanRect.top - containerRect.top + spanRect.height / 2;
+    const w = spanRect.width + padX * 2;
+    const h = spanRect.height + padY * 2;
+
+    const paths = getRoughEllipsePaths(cx, cy, w, h, isDark);
+    setPathData(
+      paths.map((p) => ({ d: p.d, stroke: p.stroke ?? (isDark ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.75)") }))
+    );
+    setSvgBox({ w: containerRect.width, h: containerRect.height });
+
+    // Small delay so the SVG path is in the DOM before we animate
+    const t = setTimeout(() => setDrawn(true), 80);
+    return () => clearTimeout(t);
+  }, [trigger, isDark]);
+
+  if (!pathData.length) return null;
+
+  return (
+    <svg
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: svgBox.w,
+        height: svgBox.h,
+        pointerEvents: "none",
+        overflow: "visible",
+      }}
+      aria-hidden="true"
+    >
+      {pathData.map((p, i) => (
+        <AnimatedPath key={i} d={p.d} stroke={p.stroke} animate={drawn} />
+      ))}
+    </svg>
+  );
+}
+
+function AnimatedPath({
+  d,
+  stroke,
+  animate,
+}: {
+  d: string;
+  stroke: string;
+  animate: boolean;
+}) {
+  const ref = useRef<SVGPathElement>(null);
+  const [len, setLen] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      setLen(ref.current.getTotalLength());
+    }
+  }, [d]);
+
+  const dashStyle =
+    len !== null
+      ? {
+        strokeDasharray: len,
+        strokeDashoffset: animate ? 0 : len,
+        transition: animate
+          ? "stroke-dashoffset 0.9s cubic-bezier(0.4,0,0.2,1)"
+          : "none",
+      }
+      : { opacity: 0 };
+
+  return (
+    <path
+      ref={ref}
+      d={d}
+      fill="none"
+      stroke={stroke}
+      strokeWidth={0.8}
+      strokeLinecap="round"
+      style={dashStyle}
+    />
+  );
+}
 
 export default function ReverieHero() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const [overlayOpen, setOverlayOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [circleReady, setCircleReady] = useState(false);
+
+  const gradTextRef = useRef<HTMLSpanElement>(null);
+  const paragraphContainerRef = useRef<HTMLDivElement>(null);
 
   const dividerColor = isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)";
+  const highlightClass = isDark ? "bg-white/15 text-white" : "bg-black/5 text-black";
 
   useEffect(() => {
     setIsMounted(true);
@@ -52,13 +187,16 @@ export default function ReverieHero() {
               <p
                 className="text-2xl leading-relaxed font-light"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                onMouseEnter={() => setCircleReady(true)}
+                onMouseLeave={() => setCircleReady(false)}
               >
-                I'm a computer engineering graduate who enjoys building things that
-                feel clear, intentional, and useful. I focus on front-end
-                development, UI clarity, and the kind of small design details that
+                <span ref={gradTextRef}>I'm a computer engineering graduate</span> who{" "}
+                <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>enjoys building things</span> that
+                feel clear, intentional, and useful. I focus on <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>front-end
+                  development</span>, <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>UI clarity</span>, and the kind of small design details that
                 make an interface feel natural. Reverie brings together a few
                 projects I've built while learning how to design, structure, and
-                ship complete features across mobile and web.
+                <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>ship complete features across mobile and web</span>.
               </p>
             </div>
 
@@ -112,18 +250,35 @@ export default function ReverieHero() {
             Author~
           </h2>
 
-          {/* Full text on md+, truncated on mobile */}
-          <p
-            className="text-lg sm:text-2xl md:text-3xl xl:text-4xl leading-relaxed font-light line-clamp-4 sm:line-clamp-none"
-            style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-          >
-            I'm a computer engineering graduate who enjoys building things that
-            feel clear, intentional, and useful. I focus on front-end
-            development, UI clarity, and the kind of small design details that
-            make an interface feel natural. Reverie brings together a few
-            projects I've built while learning how to design, structure, and
-            ship complete features across mobile and web.
-          </p>
+          {/* Paragraph with rough-circle target — relative container for SVG overlay */}
+          <div ref={paragraphContainerRef} style={{ position: "relative" }}>
+            <p
+              className="text-lg sm:text-2xl md:text-3xl xl:text-4xl leading-relaxed font-light line-clamp-4 sm:line-clamp-none"
+              style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+              onMouseEnter={() => setCircleReady(true)}
+              onMouseLeave={() => setCircleReady(false)}
+            >
+              <span ref={gradTextRef}>I'm a computer engineering graduate</span> who{" "}
+              <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>enjoys building things</span> that
+              feel clear, intentional, and useful. I focus on{" "}
+              <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>front-end
+                development</span>,{" "}
+              <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>UI clarity</span>, and the kind of small design details that
+              make an interface feel natural. Reverie brings together a few
+              projects I've built while learning how to design, structure, and{" "}
+              <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>ship complete features across mobile and web</span>.
+            </p>
+
+            {/* Rough circle SVG overlay */}
+            {isMounted && (
+              <RoughCircle
+                targetRef={gradTextRef}
+                containerRef={paragraphContainerRef}
+                isDark={isDark}
+                trigger={circleReady}
+              />
+            )}
+          </div>
 
           {/* Opens overlay on mobile */}
           <button
@@ -153,7 +308,7 @@ export default function ReverieHero() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="relative w-fit text-xl sm:text-2xl md:text-3xl xl:text-4xl font-light transition-colors duration-200 hover:text-[#800020] after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-px after:bg-[#800020] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full"
+                className="relative w-fit text-xl sm:text-2xl md:text-3xl xl:text-4xl font-light transition-colors duration-200 hover:text-[#000000] after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-px after:bg-[#000000] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
               >
                 {link.name}
