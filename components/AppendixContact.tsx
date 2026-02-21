@@ -43,7 +43,10 @@ export default function AppendixContact() {
         </div>
 
         {/* 2. Main Two-Column Spread */}
-        <div className="grid grid-cols-1 xl:grid-cols-[7fr_5fr] gap-12 xl:gap-24">
+        <div
+          className="grid grid-cols-1 xl:grid-cols-[7fr_5fr] gap-12 xl:gap-24 lg:border lg:p-12 xl:p-16"
+          style={{ borderColor: dividerColor }}
+        >
 
           {/* Left Column — Formal Text Block */}
           <div className="flex flex-col space-y-16 xl:pr-24 xl:border-r border-b xl:border-b-0 pb-16 xl:pb-0" style={{ borderColor: dividerColor }}>

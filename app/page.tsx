@@ -1,5 +1,6 @@
 "use client";
 
+import About from "@/components/About";
 import AppendixContact from "@/components/AppendixContact";
 import Navbar from "@/components/Navbar";
 import { ProjectsList } from "@/components/Projects";
@@ -17,6 +18,8 @@ export default function Page() {
         <ReverieHero />
         <div className="w-full h-px bg-zinc-600 dark:bg-zinc-800 hidden lg:block opacity-40" />
         <ProjectsList />
+        <div className="w-full h-px bg-zinc-600 dark:bg-zinc-800 hidden lg:block opacity-40" />
+        <About />
         <div className="w-full h-px bg-zinc-600 dark:bg-zinc-800 hidden lg:block opacity-40" />
         <AppendixContact />
       </div>

@@ -2,9 +2,9 @@
 
 import { useTheme } from "@/contexts/ThemeContext";
 import { PROJECTS } from "@/data/PROJECTS";
-import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import React from "react";
+import ProjectDetail from "./ProjectDetail";
 
 export interface Project {
   id: string;
@@ -38,13 +38,14 @@ export interface Project {
 export function ProjectCard({
   project,
   className = "",
+  onViewCase,
 }: {
   project: Project;
   className?: string;
+  onViewCase?: () => void;
 }) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const [isHovered, setIsHovered] = useState(false);
   const dividerColor = isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)";
 
   return (
@@ -74,8 +75,6 @@ export function ProjectCard({
         <div
           className="order-1 min-[600px]:order-2 px-4 py-8 min-[600px]:px-6 min-[600px]:py-3 border-b min-[600px]:border-b-0 flex items-center justify-center relative group min-h-[100px]"
           style={{ borderColor: dividerColor }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
         >
           <div className="w-full h-64 min-[600px]:w-40 min-[600px]:h-40 lg:w-48 lg:h-48 relative">
             <Image
@@ -85,26 +84,6 @@ export function ProjectCard({
               className="object-contain transition-transform duration-300 group-hover:scale-110"
             />
           </div>
-
-          <AnimatePresence>
-            {isHovered && project.hoverGif && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.8, y: 10 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="absolute bottom-full left-1/2 -translate-x-1/2 mb-8 z-50 pointer-events-none"
-              >
-                <div className={`${project.tooltipClass || "w-40 md:w-56"} rounded-lg overflow-hidden border shadow-2xl ${isDark ? "bg-zinc-900 border-zinc-800" : "bg-white border-zinc-200"}`}>
-                  <img
-                    src={project.hoverGif}
-                    alt={`${project.title} preview`}
-                    className="w-full h-auto block"
-                  />
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
       </div>
 
@@ -113,7 +92,11 @@ export function ProjectCard({
         className="px-4 py-1.5 md:py-2 border-t"
         style={{ borderColor: dividerColor }}
       >
-        <button className="text-lg md:text-xl font-light italic tracking-[0.2em] uppercase hover:opacity-70 transition-opacity" style={{ fontFamily: "'Arapey', serif" }}>
+        <button
+          onClick={onViewCase}
+          className="text-lg md:text-xl font-light italic tracking-[0.2em] uppercase hover:opacity-70 transition-opacity"
+          style={{ fontFamily: "'Arapey', serif" }}
+        >
           [View case]
         </button>
       </div>
@@ -125,6 +108,7 @@ export function ProjectCard({
 export function ProjectsList() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const [selectedProject, setSelectedProject] = React.useState<Project | null>(null);
   const [p1, p2, p3] = PROJECTS;
   const dividerColor = isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)";
 
@@ -159,20 +143,25 @@ export function ProjectsList() {
 
         {/* Quadrant 2: Project 1 */}
         <div className="border-b" style={{ borderColor: dividerColor }}>
-          {p1 && <ProjectCard project={p1} />}
+          {p1 && <ProjectCard project={p1} onViewCase={() => setSelectedProject(p1)} />}
         </div>
 
         {/* Quadrant 3: Project 2 */}
         <div className="min-[1631px]:border-r border-b min-[1631px]:border-b-0" style={{ borderColor: dividerColor }}>
-          {p2 && <ProjectCard project={p2} />}
+          {p2 && <ProjectCard project={p2} onViewCase={() => setSelectedProject(p2)} />}
         </div>
 
 
         {/* Quadrant 4: Project 3 */}
         <div className="">
-          {p3 && <ProjectCard project={p3} />}
+          {p3 && <ProjectCard project={p3} onViewCase={() => setSelectedProject(p3)} />}
         </div>
       </div>
+
+      <ProjectDetail
+        project={selectedProject ?? undefined}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
 
   );
