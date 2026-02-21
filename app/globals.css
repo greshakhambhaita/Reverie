@@ -1,0 +1,92 @@
+@import "../node_modules/tailwindcss/index.css";
+@source "../components";
+@source "../app";
+
+@theme {
+  --font-arapey: Arapey, serif;
+  --font-italiana: Italiana, serif;
+  --font-source: "Source Sans 3", sans-serif;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.page-frame {
+  min-height: 100vh;
+  max-width: 1680px;
+  margin-inline: clamp(40px, 6vw, 120px);
+  margin-block: clamp(32px, 4vw, 80px);
+  padding-inline: clamp(32px, 3vw, 56px);
+  padding-block: clamp(32px, 3vw, 48px);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.page-frame>* {
+  margin-bottom: 40px;
+}
+
+.section-block {
+  width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .page-frame {
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    width: 100%;
+  }
+
+  .section-block,
+  .page-frame>* {
+    width: 100%;
+    padding-inline: 0;
+    margin-bottom: 0;
+  }
+}
+
+@keyframes wipe {
+  0% {
+    width: 0%;
+    opacity: 1;
+  }
+
+  60% {
+    width: 140%;
+    opacity: 1;
+  }
+
+  100% {
+    width: 140%;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-wipe {
+  animation: wipe 0.6s ease forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease forwards;
+}
