@@ -141,6 +141,7 @@ export default function ReverieHero() {
   const [overlayOpen, setOverlayOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [circleReady, setCircleReady] = useState(false);
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   const gradTextRef = useRef<HTMLSpanElement>(null);
   const paragraphContainerRef = useRef<HTMLDivElement>(null);
@@ -150,6 +151,14 @@ export default function ReverieHero() {
 
   useEffect(() => {
     setIsMounted(true);
+
+    // Check for large screen (min-width: 1024px)
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    setIsLargeScreen(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setIsLargeScreen(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
   }, []);
 
   useEffect(() => {
@@ -269,8 +278,8 @@ export default function ReverieHero() {
               <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>ship complete features across mobile and web</span>.
             </p>
 
-            {/* Rough circle SVG overlay */}
-            {isMounted && (
+            {/* Rough circle SVG overlay - Only on large screens */}
+            {isMounted && isLargeScreen && (
               <RoughCircle
                 targetRef={gradTextRef}
                 containerRef={paragraphContainerRef}
