@@ -25,7 +25,7 @@ export default function AppendixContact() {
         {/* 1. Header Block (Centered, Sparse) */}
         <div className="flex flex-col items-center justify-center mb-16 md:mb-24">
           <h2
-            className="text-6xl md:text-8xl lg:text-[100px] font-normal tracking-tight"
+            className="text-6xl md:text-8xl lg:text-[120px] font-normal tracking-tight"
             style={{ fontFamily: "'Italiana', serif" }}
           >
             Appendix IV
@@ -43,10 +43,10 @@ export default function AppendixContact() {
         </div>
 
         {/* 2. Main Two-Column Spread */}
-        <div className="grid grid-cols-1 lg:grid-cols-[7fr_5fr] gap-12 lg:gap-24">
+        <div className="grid grid-cols-1 xl:grid-cols-[7fr_5fr] gap-12 xl:gap-24">
 
           {/* Left Column — Formal Text Block */}
-          <div className="flex flex-col space-y-16 lg:pr-12 xl:pr-24 lg:border-r border-b lg:border-b-0 pb-16 lg:pb-0" style={{ borderColor: dividerColor }}>
+          <div className="flex flex-col space-y-16 xl:pr-24 xl:border-r border-b xl:border-b-0 pb-16 xl:pb-0" style={{ borderColor: dividerColor }}>
             <p
               className="text-base sm:text-lg md:text-xl xl:text-2xl leading-relaxed font-light"
               style={{ fontFamily: "'Source Sans 3', sans-serif" }}

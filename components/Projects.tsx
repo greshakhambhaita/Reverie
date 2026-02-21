@@ -61,9 +61,9 @@ export function ProjectCard({
       </div>
 
       {/* Content Row: Description and Logo */}
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_auto]">
+      <div className="flex flex-col min-[600px]:grid min-[600px]:grid-cols-[1fr_auto]">
         <div
-          className="px-4 py-1.5 md:py-2 border-b md:border-b-0 md:border-r flex items-center"
+          className="order-2 min-[600px]:order-1 px-4 py-5 min-[600px]:py-2 min-[600px]:border-r flex items-center"
           style={{ borderColor: dividerColor }}
         >
           <p className="text-lg md:text-xl lg:text-2xl font-light leading-relaxed opacity-90" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
@@ -72,11 +72,12 @@ export function ProjectCard({
         </div>
 
         <div
-          className="px-4 py-1.5 md:px-6 md:py-3 flex items-center justify-center relative group min-h-[100px]"
+          className="order-1 min-[600px]:order-2 px-4 py-8 min-[600px]:px-6 min-[600px]:py-3 border-b min-[600px]:border-b-0 flex items-center justify-center relative group min-h-[100px]"
+          style={{ borderColor: dividerColor }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 relative">
+          <div className="w-full h-64 min-[600px]:w-40 min-[600px]:h-40 lg:w-48 lg:h-48 relative">
             <Image
               src={isDark ? project.darkIcon : project.lightIcon}
               alt={project.title}
