@@ -60,7 +60,7 @@ export default function AppendixContact() {
   };
 
   const contactLinks = [
-    { label: "Email", value: "gresha.khambhaita@example.com", href: "mailto:gresha.khambhaita@example.com" },
+    { label: "Email", value: "greshakhambhaita@gmail.com", href: "mailto:greshakhambhaita@gmail.com" },
     { label: "GitHub", value: "github.com/reykhambhaita", href: "https://github.com/reykhambhaita" },
     { label: "LinkedIn", value: "linkedin.com/in/gresha-khambhaita", href: "https://linkedin.com/in/gresha-khambhaita" },
     { label: "Cal.com", value: "cal.com/gresha-khambhaita", href: "https://cal.com/gresha-khambhaita" },
