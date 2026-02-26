@@ -302,7 +302,7 @@ export default function ReverieHero() {
         </div>
 
         {/* Right Column: Chapters — hidden on mobile */}
-        <div className="hidden sm:flex flex-col space-y-6 md:space-y-10 p-6 md:p-10">
+        <div className="hidden md:flex flex-col space-y-6 md:space-y-10 p-6 md:p-10">
           <h2
             className="text-2xl sm:text-2xl md:text-4xl font-light italic border-b pb-4 inline-block self-start w-full"
             style={{ fontFamily: "'Arapey', serif", borderColor: dividerColor }}

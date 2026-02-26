@@ -2,16 +2,68 @@
 
 import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function AppendixContact() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const dividerColor = isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)";
 
+  // Form State
+  const [formData, setFormData] = useState({
+    filedBy: "",
+    returnAddress: "",
+    statement: "",
+  });
+
+  // Submission State
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+  const [archiveRef, setArchiveRef] = useState("RV-APP-IV-2026");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.filedBy || !formData.returnAddress || !formData.statement) {
+      setStatus("error");
+      setMessage("All fields are required.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setStatus("idle");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        setMessage(data.message || "Correspondence received.");
+        setArchiveRef(data.archiveRef);
+        setFormData({ filedBy: "", returnAddress: "", statement: "" });
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Failed to submit.");
+      }
+    } catch (err) {
+      setStatus("error");
+      setMessage("An unexpected error occurred.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const contactLinks = [
     { label: "Email", value: "gresha.khambhaita@example.com", href: "mailto:gresha.khambhaita@example.com" },
     { label: "GitHub", value: "github.com/reykhambhaita", href: "https://github.com/reykhambhaita" },
     { label: "LinkedIn", value: "linkedin.com/in/gresha-khambhaita", href: "https://linkedin.com/in/gresha-khambhaita" },
+    { label: "Cal.com", value: "cal.com/gresha-khambhaita", href: "https://cal.com/gresha-khambhaita" },
     { label: "Location", value: "Available for remote work", href: "#" },
   ];
 
@@ -25,7 +77,7 @@ export default function AppendixContact() {
         {/* 1. Header Block (Centered, Sparse) */}
         <div className="flex flex-col items-start justify-start mb-10 md:mb-18">
           <h2
-            className="text-4xl md:text-6xl lg:text-[120px] font-normal tracking-tight ml-10"
+            className="text-5xl md:text-7xl lg:text-[110px] font-normal tracking-tight leading-none"
             style={{ fontFamily: "'Italiana', serif" }}
           >
             Appendix IV
@@ -102,7 +154,9 @@ export default function AppendixContact() {
               <div className="flex flex-col space-y-6">
                 <div className="flex flex-col space-y-1">
                   <span className="text-xs tracking-widest uppercase opacity-50" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Submission Status</span>
-                  <span className="text-xl md:text-2xl font-light italic" style={{ fontFamily: "'Arapey', serif" }}>Open</span>
+                  <span className="text-xl md:text-2xl font-light italic" style={{ fontFamily: "'Arapey', serif" }}>
+                    {status === "success" ? "Received & Archived" : "Open"}
+                  </span>
                 </div>
 
 
@@ -113,7 +167,7 @@ export default function AppendixContact() {
 
                 <div className="flex flex-col space-y-1">
                   <span className="text-xs tracking-widest uppercase opacity-50" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Archive Code</span>
-                  <span className="text-lg md:text-xl font-light" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>RV-APP-IV-2026</span>
+                  <span className="text-lg md:text-xl font-light" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>{archiveRef}</span>
                 </div>
               </div>
 
@@ -130,11 +184,15 @@ export default function AppendixContact() {
 
             {/* Optional Contact Form / Submission Record */}
             <div className="mt-16 border-l pl-8 md:pl-12" style={{ borderColor: dividerColor }}>
-              <div className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="flex flex-col">
                   <label className="text-xs tracking-widest uppercase opacity-50 mb-2" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Filed By:</label>
                   <input
                     type="text"
+                    value={formData.filedBy}
+                    onChange={(e) => setFormData({ ...formData, filedBy: e.target.value })}
+                    required
+                    disabled={isSubmitting}
                     className="border-b bg-transparent outline-none py-2 text-lg md:text-xl font-light focus:border-opacity-100 transition-colors"
                     style={{ borderColor: dividerColor, fontFamily: "'Arapey', serif" }}
                   />
@@ -142,7 +200,11 @@ export default function AppendixContact() {
                 <div className="flex flex-col">
                   <label className="text-xs tracking-widest uppercase opacity-50 mb-2" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Return Address:</label>
                   <input
-                    type="text"
+                    type="email"
+                    value={formData.returnAddress}
+                    onChange={(e) => setFormData({ ...formData, returnAddress: e.target.value })}
+                    required
+                    disabled={isSubmitting}
                     className="border-b bg-transparent outline-none py-2 text-lg md:text-xl font-light focus:border-opacity-100 transition-colors"
                     style={{ borderColor: dividerColor, fontFamily: "'Arapey', serif" }}
                   />
@@ -150,17 +212,30 @@ export default function AppendixContact() {
                 <div className="flex flex-col">
                   <label className="text-xs tracking-widest uppercase opacity-50 mb-2" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Statement:</label>
                   <textarea
+                    value={formData.statement}
+                    onChange={(e) => setFormData({ ...formData, statement: e.target.value })}
+                    required
+                    disabled={isSubmitting}
                     className="border-b bg-transparent outline-none py-2 text-lg md:text-xl font-light resize-none h-24 focus:border-opacity-100 transition-colors"
                     style={{ borderColor: dividerColor, fontFamily: "'Arapey', serif" }}
                   />
                 </div>
+
+                {status !== "idle" && (
+                  <p className={`text-sm italic ${status === "success" ? "text-green-500" : "text-red-500"}`} style={{ fontFamily: "'Arapey', serif" }}>
+                    {message}
+                  </p>
+                )}
+
                 <button
-                  className="mt-4 text-xs tracking-widest uppercase opacity-50 hover:opacity-100 transition-opacity"
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`mt-4 text-xs tracking-widest uppercase transition-opacity ${isSubmitting ? "opacity-20" : "opacity-50 hover:opacity-100"}`}
                   style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                 >
-                  [ Submit Record ]
+                  {isSubmitting ? "[ Processing... ]" : "[ Submit Record ]"}
                 </button>
-              </div>
+              </form>
             </div>
 
           </div>

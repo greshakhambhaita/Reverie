@@ -17,11 +17,11 @@ export default function Page() {
       <Navbar />
       <div className="overflow-x-hidden pb-14">
         <ReverieHero />
-        <div className="w-full h-px bg-zinc-600 dark:bg-zinc-800 hidden lg:block opacity-40" />
+        <div className="w-full h-px bg-zinc-600 dark:bg-zinc-800 hidden md:block opacity-40" />
         <ProjectsList />
-        <div className="w-full h-px bg-zinc-600 dark:bg-zinc-800 hidden lg:block opacity-40" />
+        <div className="w-full h-px bg-zinc-600 dark:bg-zinc-800 hidden md:block opacity-40" />
         <About />
-        <div className="w-full h-px bg-zinc-600 dark:bg-zinc-800 hidden lg:block opacity-40" />
+        <div className="w-full h-px bg-zinc-600 dark:bg-zinc-800 hidden md:block opacity-40" />
         <AppendixContact />
       </div>
       <SideNav />

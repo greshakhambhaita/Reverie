@@ -102,7 +102,7 @@ export default function SideNav() {
 
   return (
     <nav
-      className="fixed right-0 top-0 bottom-0 z-10000 pointer-events-none hidden lg:flex flex-col items-end justify-center"
+      className="fixed right-0 top-0 bottom-0 z-10000 pointer-events-none hidden md:flex flex-col items-end justify-center"
       style={{ fontFamily: "'Italiana', serif" }}
     >
       <div className="pointer-events-auto mt-auto mb-auto relative mr-0" style={{ height: "min(800px, 85vh)", width: "80px" }}>
