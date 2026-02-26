@@ -54,8 +54,8 @@ export default function About() {
               <img
                 src="/images/about_crow.jpeg"
                 alt="Crow Illustration"
-                className="w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto opacity-75 mix-blend-multiply dark:mix-blend-screen transition-all duration-300 hover:scale-105"
-                style={{ filter: isDark ? "invert(1)" : "none" }}
+                className="w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto opacity-75 transition-all duration-300 hover:scale-105"
+                style={{ filter: "none" }}
               />
             </div>
           </div>
@@ -90,8 +90,10 @@ export default function About() {
                   key={item.label}
                   className="group flex flex-col space-y-1 py-5 border-t transition-opacity duration-200"
                   style={{
-                    borderColor: dividerColor,
-                    borderBottom: i === fields.length - 1 ? `1px solid ${dividerColor}` : undefined,
+                    borderTopColor: dividerColor,
+                    borderBottomWidth: i === fields.length - 1 ? "1px" : "0px",
+                    borderBottomStyle: i === fields.length - 1 ? "solid" : "none",
+                    borderBottomColor: i === fields.length - 1 ? dividerColor : "transparent",
                   }}
                 >
                   <span
