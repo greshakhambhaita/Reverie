@@ -3,8 +3,6 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { PROJECTS } from "@/data/PROJECTS";
 import Image from "next/image";
-import React from "react";
-import ProjectDetail from "./ProjectDetail";
 
 export interface Project {
   id: string;
@@ -32,51 +30,60 @@ export interface Project {
     pages: string;
   };
   tooltipClass?: string;
+  problem?: string;
+  solution?: string;
+  implementation?: string;
+  intent?: string;
 }
 
 
 export function ProjectCard({
   project,
   className = "",
-  onViewCase,
 }: {
   project: Project;
   className?: string;
-  onViewCase?: () => void;
 }) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const dividerColor = isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)";
 
   return (
-    <div className={`flex flex-col w-full h-full ${className}`}>
+    <div className={`flex flex-col w-full h-full border ${className}`} style={{ borderColor: dividerColor }}>
       {/* Title Row */}
-
       <div
-        className="px-4 py-1.5 md:py-2 border-b"
+        className="px-4 py-2 border-b flex justify-between items-center"
         style={{ borderColor: dividerColor }}
       >
-        <h3 className="text-3xl md:text-4xl lg:text-5xl font-normal" style={{ fontFamily: "'Italiana', serif" }}>
+        <h3 className="text-3xl md:text-3xl lg:text-5xl font-normal" style={{ fontFamily: "'Italiana', serif" }}>
           {project.numeral}. {project.title}
         </h3>
+        <button
+          className="text-base md:text-lg lg:text-xl font-light opacity-70 hover:opacity-100 transition-opacity whitespace-nowrap ml-4"
+          style={{ fontFamily: "'Arapey', serif" }}
+        >
+          [Read case]
+        </button>
       </div>
 
       {/* Content Row: Description and Logo */}
-      <div className="flex flex-col min-[600px]:grid min-[600px]:grid-cols-[1fr_auto]">
+      <div className="grow grid grid-cols-1 min-[600px]:grid-cols-[1fr_200px] lg:grid-cols-[1fr_240px]">
         <div
-          className="order-2 min-[600px]:order-1 px-4 py-5 min-[600px]:py-2 min-[600px]:border-r flex items-center"
+          className="px-4 py-6 min-[600px]:border-r flex items-center"
           style={{ borderColor: dividerColor }}
         >
-          <p className="text-lg md:text-xl lg:text-2xl font-light leading-relaxed opacity-90" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+          <p
+            className="text-lg md:text-xl lg:text-2xl font-light leading-snug opacity-90 line-clamp-3 md:line-clamp-4"
+            style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+          >
             {project.description}
           </p>
         </div>
 
         <div
-          className="order-1 min-[600px]:order-2 px-4 py-8 min-[600px]:px-6 min-[600px]:py-3 border-b min-[600px]:border-b-0 flex items-center justify-center relative group min-h-[100px]"
-          style={{ borderColor: dividerColor }}
+          className="px-4 py-8 flex items-center justify-center relative group"
         >
-          <div className="w-full h-64 min-[600px]:w-40 min-[600px]:h-40 lg:w-48 lg:h-48 relative">
+          <div className="w-32 h-32 md:w-40 md:h-40 relative">
             <Image
               src={isDark ? project.darkIcon : project.lightIcon}
               alt={project.title}
@@ -87,18 +94,34 @@ export function ProjectCard({
         </div>
       </div>
 
-      {/* Button Row */}
+      {/* Tech Stack and Read Case Row */}
       <div
-        className="px-4 py-1.5 md:py-2 border-t"
+        className="px-4 py-3 border-t flex justify-between items-center"
         style={{ borderColor: dividerColor }}
       >
-        <button
-          onClick={onViewCase}
-          className="text-lg md:text-xl font-light italic tracking-[0.2em] uppercase hover:opacity-70 transition-opacity"
+        <div className="flex flex-wrap gap-2 py-2">
+          {project.techStack.map((tech, index) => (
+            <span
+              key={index}
+              className="text-sm md:text-base font-normal px-3 py-1 border rounded-full"
+              style={{
+                fontFamily: "'Source Sans 3', sans-serif",
+                borderColor: isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)"
+              }}
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+        <a
+          href={project.repoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-base md:text-lg lg:text-xl font-light opacity-70 hover:opacity-100 transition-opacity whitespace-nowrap ml-4"
           style={{ fontFamily: "'Arapey', serif" }}
         >
-          [View case]
-        </button>
+          [View Repo]
+        </a>
       </div>
     </div>
   );
@@ -108,20 +131,18 @@ export function ProjectCard({
 export function ProjectsList() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
-  const [selectedProject, setSelectedProject] = React.useState<Project | null>(null);
   const [p1, p2, p3] = PROJECTS;
   const dividerColor = isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)";
 
   return (
     <section id="projects" className={`min-h-screen flex flex-col items-center justify-center px-6 md:px-12 lg:px-24 py-12 transition-colors duration-300 ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
       <div
-        className="w-full max-w-[1800px] grid grid-cols-1 min-[1631px]:grid-cols-2 border"
-        style={{ borderColor: dividerColor }}
+        className="w-full max-w-[1800px] grid grid-cols-1 min-[1631px]:grid-cols-2 gap-8 md:gap-12 lg:gap-16"
       >
 
         {/* Quadrant 1: Header */}
         <div
-          className="p-6 md:p-10 lg:p-12 flex flex-col justify-center space-y-6 min-[1631px]:border-r border-b"
+          className="p-6 md:p-10 lg:p-12 flex flex-col justify-center space-y-6 "
           style={{ borderColor: dividerColor }}
         >
 
@@ -142,28 +163,22 @@ export function ProjectsList() {
         </div>
 
         {/* Quadrant 2: Project 1 */}
-        <div className="border-b" style={{ borderColor: dividerColor }}>
-          {p1 && <ProjectCard project={p1} onViewCase={() => setSelectedProject(p1)} />}
+        <div className="">
+          {p1 && <ProjectCard project={p1} />}
         </div>
 
         {/* Quadrant 3: Project 2 */}
-        <div className="min-[1631px]:border-r border-b min-[1631px]:border-b-0" style={{ borderColor: dividerColor }}>
-          {p2 && <ProjectCard project={p2} onViewCase={() => setSelectedProject(p2)} />}
+        <div className="">
+          {p2 && <ProjectCard project={p2} />}
         </div>
 
 
         {/* Quadrant 4: Project 3 */}
         <div className="">
-          {p3 && <ProjectCard project={p3} onViewCase={() => setSelectedProject(p3)} />}
+          {p3 && <ProjectCard project={p3} />}
         </div>
       </div>
-
-      <ProjectDetail
-        project={selectedProject ?? undefined}
-        onClose={() => setSelectedProject(null)}
-      />
     </section>
-
   );
 }
 

@@ -71,7 +71,7 @@ export default function Navbar() {
       </button>
 
       {/* Center (mobile only): Nav link icons — hidden on md+ where chapters column handles this */}
-      <div className="flex md:hidden items-center gap-5 pointer-events-auto">
+      <div className="flex md:hidden items-center gap-8 pointer-events-auto">
         {navLinks.map((link) => (
           <Link
             key={link.name}

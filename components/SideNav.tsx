@@ -61,7 +61,7 @@ export default function SideNav() {
   const notchX = W - 6; // base line is on the right
   const r = 10;
   const startY = 100; // brought down by 40px
-  const tabH = 160;  // reduced from 160
+  const tabH = 175;  // reduced from 160
   const slopeRatio = 0.45;
 
   const buildTabPath = (active: number) => {
@@ -120,7 +120,7 @@ export default function SideNav() {
           />
           {/* Tab outline */}
           <path
-            d={tabPath}
+            d={`${tabPath} L ${W},${H} L ${W},0 Z`}
             fill="none"
             stroke={strokeColor}
             strokeWidth="0.5"

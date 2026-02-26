@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "@/contexts/ThemeContext";
+import { useInView } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -140,11 +141,15 @@ export default function ReverieHero() {
   const isDark = theme === "dark";
   const [overlayOpen, setOverlayOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const [circleReady, setCircleReady] = useState(false);
   const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   const gradTextRef = useRef<HTMLSpanElement>(null);
   const paragraphContainerRef = useRef<HTMLDivElement>(null);
+
+  const isInView = useInView(paragraphContainerRef, {
+    amount: "all",
+    // We want it to be "gone" when not in view, and "back" when fully in view.
+  });
 
   const dividerColor = isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)";
   const highlightClass = isDark ? "bg-white/15 text-white" : "bg-black/5 text-black";
@@ -196,8 +201,6 @@ export default function ReverieHero() {
               <p
                 className="text-2xl leading-relaxed font-light"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-                onMouseEnter={() => setCircleReady(true)}
-                onMouseLeave={() => setCircleReady(false)}
               >
                 <span ref={gradTextRef}>I'm a computer engineering graduate</span> who{" "}
                 <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>enjoys building things</span> that
@@ -264,8 +267,6 @@ export default function ReverieHero() {
             <p
               className="text-lg sm:text-2xl md:text-3xl xl:text-4xl leading-relaxed font-light line-clamp-4 sm:line-clamp-none"
               style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-              onMouseEnter={() => setCircleReady(true)}
-              onMouseLeave={() => setCircleReady(false)}
             >
               <span ref={gradTextRef}>I'm a computer engineering graduate</span> who{" "}
               <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>enjoys building things</span> that
@@ -284,7 +285,7 @@ export default function ReverieHero() {
                 targetRef={gradTextRef}
                 containerRef={paragraphContainerRef}
                 isDark={isDark}
-                trigger={circleReady}
+                trigger={isInView}
               />
             )}
           </div>
@@ -317,7 +318,7 @@ export default function ReverieHero() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="relative w-fit text-xl sm:text-2xl md:text-3xl xl:text-4xl font-light transition-colors duration-200 hover:text-[#000000] after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-px after:bg-[#000000] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full"
+                className={`relative w-fit text-xl sm:text-2xl md:text-3xl xl:text-4xl font-light transition-colors duration-200 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-px after:transition-all after:duration-300 after:ease-in-out hover:after:w-full ${isDark ? "hover:text-white after:bg-white" : "hover:text-[#000000] after:bg-[#000000]"}`}
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
               >
                 {link.name}

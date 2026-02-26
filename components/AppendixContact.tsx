@@ -37,7 +37,7 @@ export default function AppendixContact() {
             On Professional Correspondence
           </p>
           <div
-            className="w-full md:w-3/4 max-w-2xl h-px mt-16 md:mt-24"
+            className="w-full md:w-3/4 max-w-2xl h-px mt-6 md:mt-14"
             style={{ backgroundColor: dividerColor }}
           />
         </div>

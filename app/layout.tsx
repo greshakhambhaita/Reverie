@@ -3,8 +3,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Gresha Khambaita - Portfolio",
+  title: "Reverie",
   description: "Designer, developer, problem solver",
+  icons: {
+    icon: "/images/Frame 2black.svg",
+  },
 };
 
 export default function RootLayout({

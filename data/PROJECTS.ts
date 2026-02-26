@@ -32,6 +32,10 @@ export const PROJECTS: Project[] = [
       pages: "pp. 47–48.",
     },
     tooltipClass: "w-20 md:w-36",
+    problem: "Drivers often face unexpected breakdowns in unfamiliar locations, leading to stress and long wait times for unverified assistance.",
+    solution: "A mobile-first platform that instantly connects stranded drivers with a network of verified mechanics, providing real-time tracking and transparent pricing.",
+    implementation: "Built with React Native for cross-platform reliability, using a Node.js backend to handle real-time geospatial matching between users and service providers.",
+    intent: "To transform the high-friction experience of roadside assistance into a predictable, calm, and reliable digital service.",
   },
   {
     id: "oriel",
@@ -64,6 +68,10 @@ export const PROJECTS: Project[] = [
       pages: "pp. 12–15.",
     },
     tooltipClass: "w-64 md:w-80",
+    problem: "Traditional café ordering systems are often slow, prone to human error, and lack real-time synchronization between front-of-house and the kitchen.",
+    solution: "A streamlined digital ecosystem that automates the ordering and billing cycle, allowing staff to focus on quality service while the system handles the data.",
+    implementation: "Leverages a React-based SPA for the dashboard with a robust MongoDB schema to track order states and inventory in real-time.",
+    intent: "To demonstrate how minimal interaction design can significantly increase operational throughput in high-velocity hospitality environments.",
   },
   {
     id: "solace",
@@ -96,5 +104,9 @@ export const PROJECTS: Project[] = [
       pages: "pp. 89–92.",
     },
     tooltipClass: "w-64 md:w-80",
+    problem: "Most coding tutorials provide syntax without context, leaving learners unable to bridge the gap between 'knowing a command' and 'understanding a system'.",
+    solution: "An AI-augmented learning environment that deconstructs complex code in real-time, explaining the 'why' behind the 'how' through interactive visualizations.",
+    implementation: "Integrates Groq LLM pipelines with custom Tree-sitter parsers to provide deep linguistic and logical analysis of user-submitted code snippets.",
+    intent: "To create a tool that respects the learner's intelligence by offering depth and transparency instead of simplified abstractions.",
   },
 ];
