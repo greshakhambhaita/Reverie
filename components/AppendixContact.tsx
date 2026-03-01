@@ -74,34 +74,31 @@ export default function AppendixContact() {
     >
       <div className="w-full max-w-[1800px] flex flex-col relative">
 
-        {/* 1. Header Block (Centered, Sparse) */}
-        <div className="flex flex-col items-start justify-start mb-10 md:mb-18">
-          <h2
-            className="text-5xl md:text-7xl lg:text-[110px] font-normal tracking-tight leading-none"
-            style={{ fontFamily: "'Italiana', serif" }}
-          >
-            Appendix IV
-          </h2>
-          <p
-            className="text-xl md:text-2xl lg:text-3xl font-light italic mt-4 md:mt-6 opacity-80 ml-10"
-            style={{ fontFamily: "'Arapey', serif" }}
-          >
-            On Professional Correspondence
-          </p>
-          <div
-            className="w-full md:w-3/4 max-w-2xl h-px mt-6 md:mt-14"
-            style={{ backgroundColor: dividerColor }}
-          />
-        </div>
-
-        {/* 2. Main Two-Column Spread */}
+        {/* Main Two-Column Spread */}
         <div
-          className="grid grid-cols-1 xl:grid-cols-[7fr_5fr] gap-12 xl:gap-24 lg:border lg:p-12 xl:p-16"
+          className="grid grid-cols-1 xl:grid-cols-[5fr_5fr] gap-12 xl:gap-24 lg:border lg:p-12 xl:p-16"
           style={{ borderColor: dividerColor }}
         >
 
           {/* Left Column — Formal Text Block */}
           <div className="flex flex-col space-y-16 xl:pr-24 xl:border-r border-b xl:border-b-0 pb-16 xl:pb-0" style={{ borderColor: dividerColor }}>
+
+            {/* Header Block */}
+            <div className="flex flex-col items-start">
+              <h2
+                className="text-5xl md:text-7xl lg:text-[110px] font-normal tracking-tight leading-none"
+                style={{ fontFamily: "'Italiana', serif" }}
+              >
+                Appendix IV
+              </h2>
+              <p
+                className="text-xl md:text-2xl lg:text-3xl font-light italic mt-4 opacity-60"
+                style={{ fontFamily: "'Arapey', serif" }}
+              >
+                On Professional Correspondence
+              </p>
+            </div>
+
             <p
               className="text-base sm:text-lg md:text-xl xl:text-2xl leading-relaxed font-light"
               style={{ fontFamily: "'Source Sans 3', sans-serif" }}
@@ -109,7 +106,7 @@ export default function AppendixContact() {
               For professional inquiries, collaborations, or technical discussion, correspondence may be directed through the channels listed below.
             </p>
 
-            <div className="flex flex-col space-y-8 md:space-y-12">
+            <div className="flex flex-col space-y-4 md:space-y-6">
               {contactLinks.map((link) => (
                 <div key={link.label} className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 group">
                   <span
@@ -134,8 +131,10 @@ export default function AppendixContact() {
 
           {/* Right Column — Archive Panel */}
           <div className="relative flex flex-col justify-start">
+
+            {/* Submission Status Panel */}
             <div
-              className="border p-8 md:p-12 lg:p-16 flex flex-col space-y-10 relative overflow-hidden"
+              className="border p-6 md:p-8 lg:p-10 flex flex-col space-y-6 relative overflow-hidden"
               style={{ borderColor: dividerColor }}
             >
 
@@ -151,7 +150,7 @@ export default function AppendixContact() {
                 />
               </div>
 
-              <div className="flex flex-col space-y-6">
+              <div className="flex flex-col space-y-4">
                 <div className="flex flex-col space-y-1">
                   <span className="text-xs tracking-widest uppercase opacity-50" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Submission Status</span>
                   <span className="text-xl md:text-2xl font-light italic" style={{ fontFamily: "'Arapey', serif" }}>
@@ -171,7 +170,7 @@ export default function AppendixContact() {
                 </div>
               </div>
 
-              <div className="pt-8 border-t" style={{ borderColor: dividerColor }}>
+              <div className="pt-5 border-t" style={{ borderColor: dividerColor }}>
                 <p
                   className="text-sm md:text-base font-light italic opacity-60"
                   style={{ fontFamily: "'Arapey', serif" }}
@@ -182,41 +181,42 @@ export default function AppendixContact() {
 
             </div>
 
-            {/* Optional Contact Form / Submission Record */}
-            <div className="mt-16 border-l pl-8 md:pl-12" style={{ borderColor: dividerColor }}>
-              <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Contact Form / Submission Record */}
+            <div className="mt-10 border p-6 md:p-8" style={{ borderColor: dividerColor }}>
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="flex flex-col">
-                  <label className="text-xs tracking-widest uppercase opacity-50 mb-2" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Filed By:</label>
+                  <label className="text-xs tracking-widest uppercase opacity-80 mb-1" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Filed By:</label>
                   <input
                     type="text"
                     value={formData.filedBy}
                     onChange={(e) => setFormData({ ...formData, filedBy: e.target.value })}
                     required
                     disabled={isSubmitting}
-                    className="border-b bg-transparent outline-none py-2 text-lg md:text-xl font-light focus:border-opacity-100 transition-colors"
+                    className="border-b bg-transparent outline-none py-1.5 text-xl md:text-2xl font-light focus:border-opacity-100 transition-colors"
                     style={{ borderColor: dividerColor, fontFamily: "'Arapey', serif" }}
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label className="text-xs tracking-widest uppercase opacity-50 mb-2" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Return Address:</label>
+                  <label className="text-xs tracking-widest uppercase opacity-80 mb-1" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Return Address:</label>
                   <input
                     type="email"
                     value={formData.returnAddress}
                     onChange={(e) => setFormData({ ...formData, returnAddress: e.target.value })}
                     required
                     disabled={isSubmitting}
-                    className="border-b bg-transparent outline-none py-2 text-lg md:text-xl font-light focus:border-opacity-100 transition-colors"
+                    className="border-b bg-transparent outline-none py-1.5 text-lg md:text-xl font-light focus:border-opacity-100 transition-colors"
                     style={{ borderColor: dividerColor, fontFamily: "'Arapey', serif" }}
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label className="text-xs tracking-widest uppercase opacity-50 mb-2" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Statement:</label>
+                  <label className="text-xs tracking-widest uppercase opacity-80 mb-1" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Statement:</label>
                   <textarea
                     value={formData.statement}
                     onChange={(e) => setFormData({ ...formData, statement: e.target.value })}
                     required
                     disabled={isSubmitting}
-                    className="border-b bg-transparent outline-none py-2 text-lg md:text-xl font-light resize-none h-24 focus:border-opacity-100 transition-colors"
+                    className="border-b bg-transparent outline-none py-1.5 text-xl md:text-2xl font-light resize-none focus:border-opacity-100 transition-colors"
+                    rows={1}
                     style={{ borderColor: dividerColor, fontFamily: "'Arapey', serif" }}
                   />
                 </div>
@@ -230,7 +230,7 @@ export default function AppendixContact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`mt-4 text-xs tracking-widest uppercase transition-opacity ${isSubmitting ? "opacity-20" : "opacity-50 hover:opacity-100"}`}
+                  className={`mt-2 text-sm md:text-base tracking-widest uppercase font-medium cursor-pointer transition-opacity ${isSubmitting ? "opacity-20 cursor-not-allowed" : "opacity-90 hover:opacity-100"}`}
                   style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                 >
                   {isSubmitting ? "[ Processing... ]" : "[ Submit Record ]"}
