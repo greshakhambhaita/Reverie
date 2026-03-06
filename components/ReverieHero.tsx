@@ -332,7 +332,7 @@ export default function ReverieHero() {
               <span>[Open Resume]</span>
             </button>
             <a
-              href="https://github.com/reykhambhaita"
+              href="https://github.com/greshakhambhaita"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-light opacity-70 hover:opacity-100 transition-opacity flex items-center gap-3 w-fit"
@@ -371,7 +371,7 @@ export default function ReverieHero() {
             <span>Open Resume</span>
           </button>
           <a
-            href="https://github.com/reykhambhaita"
+            href="https://github.com/greshakhambhaita"
             target="_blank"
             rel="noopener noreferrer"
             className={`w-full flex items-center gap-3 py-3 px-4 font-light text-xl transition-colors duration-200 ${isDark ? "hover:bg-white hover:text-black" : "hover:bg-black hover:text-white"}`}
