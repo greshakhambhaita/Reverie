@@ -23,7 +23,7 @@ export const PROJECTS: Project[] = [
     role: "Full-stack dev",
     timeline: "4 months (2025)",
     status: "Prototype (APK Build)",
-    repoUrl: "https://github.com/reykhambhaita/orb",
+    repoUrl: "https://github.com/greshakhambhaita/orb",
     citation: {
       author: "Khambhaita, G.",
       year: "2024",
@@ -59,7 +59,7 @@ export const PROJECTS: Project[] = [
     role: "Full-stack dev",
     timeline: "2 weeks (2025)",
     status: "Production Ready",
-    repoUrl: "https://github.com/reykhambhaita/oriel",
+    repoUrl: "https://github.com/greshakhambhaita/oriel",
     citation: {
       author: "Khambhaita, G.",
       year: "2024",
@@ -95,7 +95,7 @@ export const PROJECTS: Project[] = [
     role: "Full-stack dev",
     timeline: "2 months (2025)",
     status: "Production Ready",
-    repoUrl: "https://github.com/reykhambhaita/solace",
+    repoUrl: "https://github.com/greshakhambhaita/solace",
     citation: {
       author: "Khambhaita, G.",
       year: "2024",
