@@ -27,7 +27,6 @@ export default function About() {
           className="grid grid-cols-1 xl:grid-cols-[5fr_5fr] gap-12 xl:gap-24 lg:border lg:p-12 xl:p-16"
           style={{ borderColor: dividerColor }}
         >
-
           {/* Left Column — Header and Illustration */}
           <div
             className="flex flex-col items-start justify-between xl:pr-24 xl:border-r border-b xl:border-b-0 pb-16 xl:pb-0"

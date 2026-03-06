@@ -2,10 +2,12 @@
 
 import { useTheme } from "@/contexts/ThemeContext";
 import { useInView } from "framer-motion";
+import { FileText, Github, Mail } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import rough from "roughjs";
+import ResumeModal from "./ResumeModal";
 
 // Draws a rough ellipse and returns an array of SVG path descriptors
 function getRoughEllipsePaths(
@@ -140,6 +142,7 @@ export default function ReverieHero() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const [overlayOpen, setOverlayOpen] = useState(false);
+  const [resumeOpen, setResumeOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isLargeScreen, setIsLargeScreen] = useState(false);
 
@@ -152,7 +155,7 @@ export default function ReverieHero() {
   });
 
   const dividerColor = isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)";
-  const highlightClass = isDark ? "bg-white/15 text-white" : "bg-black/5 text-black";
+
 
   useEffect(() => {
     setIsMounted(true);
@@ -176,7 +179,7 @@ export default function ReverieHero() {
 
   return (
     <div
-      className={`min-h-0 sm:min-h-[95vh] md:min-h-screen flex flex-col items-center justify-start px-6 md:px-12 lg:px-24 pt-12 md:pt-16 pb-4 md:pb-12 transition-colors duration-300 ${isDark ? "text-white" : "text-black"
+      className={`min-h-0 sm:min-h-[95vh] md:min-h-screen flex flex-col items-center justify-start px-6 md:px-12 lg:px-24 pt-40 md:pt-16 pb-4 md:pb-12 transition-colors duration-300 ${isDark ? "text-white" : "text-black"
         }`}
     >
       {/* ── Full-screen overlay (mobile only) ── */}
@@ -202,13 +205,11 @@ export default function ReverieHero() {
                 className="text-2xl leading-relaxed font-light"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
               >
-                <span ref={gradTextRef}>I'm a computer engineering graduate</span> who{" "}
-                <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>enjoys building things</span> that
-                feel clear, intentional, and useful. I focus on <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>front-end
-                  development</span>, <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>UI clarity</span>, and the kind of small design details that
-                make an interface feel natural. Reverie brings together a few
-                projects I've built while learning how to design, structure, and
-                <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>ship complete features across mobile and web</span>.
+                I’m an <span ref={gradTextRef}>independent full-stack developer</span> designing and shipping <span className="px-1.5 py-0.5 rounded-sm">end-to-end</span> software systems. I focus on{" "}
+                <span className="px-1.5 py-0.5 rounded-sm">front-end development</span>,{" "}
+                <span className="px-1.5 py-0.5 rounded-sm">UI clarity</span>,{" "}
+                and the structural decisions that make complex interfaces feel simple. Reverie highlights projects where I’ve built and delivered{" "}
+                <span className="px-1.5 py-0.5 rounded-sm">complete features across web and mobile</span>.
               </p>
             </div>
 
@@ -231,12 +232,20 @@ export default function ReverieHero() {
         >
           Reverie
         </h1>
-        <h2
-          className="text-xl md:text-xl lg:text-3xl font-light tracking-wide uppercase"
-          style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-        >
-          Gresha Khambhaita~
-        </h2>
+        <div className="flex flex-col md:flex-row items-center md:items-baseline justify-center gap-2 md:gap-6">
+          <h2
+            className="text-xl md:text-xl lg:text-3xl font-light tracking-wide uppercase"
+            style={{ fontFamily: "'Arapey', serif" }}
+          >
+            Gresha Khambhaita~
+          </h2>
+          <h2
+            className="text-xl md:text-xl lg:text-3xl font-light tracking-widest uppercase italic"
+            style={{ fontFamily: "'Arapey', serif" }}
+          >
+            Full-Stack Developer
+          </h2>
+        </div>
         <p
           className="text-xl md:text-3xl lg:text-4xl font-light italic opacity-90 pt-4"
           style={{ fontFamily: "'Arapey', serif" }}
@@ -268,15 +277,11 @@ export default function ReverieHero() {
               className="text-lg sm:text-2xl md:text-3xl xl:text-4xl leading-relaxed font-light line-clamp-4 sm:line-clamp-none"
               style={{ fontFamily: "'Source Sans 3', sans-serif" }}
             >
-              <span ref={gradTextRef}>I'm a computer engineering graduate</span> who{" "}
-              <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>enjoys building things</span> that
-              feel clear, intentional, and useful. I focus on{" "}
-              <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>front-end
-                development</span>,{" "}
-              <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>UI clarity</span>, and the kind of small design details that
-              make an interface feel natural. Reverie brings together a few
-              projects I've built while learning how to design, structure, and{" "}
-              <span className={`${highlightClass} px-1.5 py-0.5 rounded-sm`}>ship complete features across mobile and web</span>.
+              I’m an <span ref={gradTextRef}>independent full-stack developer</span> designing and shipping <span className="px-1.5 py-0.5 rounded-sm">end-to-end</span> software systems. I focus on{" "}
+              <span className="px-1.5 py-0.5 rounded-sm">front-end development</span>,{" "}
+              <span className="px-1.5 py-0.5 rounded-sm">UI clarity</span>,{" "}
+              and the structural decisions that make complex interfaces feel simple. Reverie highlights projects where I’ve built and delivered{" "}
+              <span className="px-1.5 py-0.5 rounded-sm">complete features across web and mobile</span>.
             </p>
 
             {/* Rough circle SVG overlay - Only on large screens */}
@@ -301,33 +306,84 @@ export default function ReverieHero() {
           </button>
         </div>
 
-        {/* Right Column: Chapters — hidden on mobile */}
+        {/* Right Column: Connect — hidden on mobile */}
         <div className="hidden md:flex flex-col space-y-6 md:space-y-10 p-6 md:p-10">
           <h2
             className="text-2xl sm:text-2xl md:text-4xl font-light italic border-b pb-4 inline-block self-start w-full"
             style={{ fontFamily: "'Arapey', serif", borderColor: dividerColor }}
           >
-            Chapters~
+            Connect~
           </h2>
           <nav className="flex flex-col space-y-4 md:space-y-6">
-            {[
-              { name: "Projects", href: "/#projects" },
-              { name: "About", href: "/#about" },
-              { name: "Contact", href: "/#contact" },
-            ].map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`relative w-fit text-xl sm:text-2xl md:text-3xl xl:text-4xl font-light transition-colors duration-200 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-px after:transition-all after:duration-300 after:ease-in-out hover:after:w-full ${isDark ? "hover:text-white after:bg-white" : "hover:text-[#000000] after:bg-[#000000]"}`}
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-              >
-                {link.name}
-              </Link>
-            ))}
+            <Link
+              href="/#contact"
+              className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-light opacity-70 hover:opacity-100 transition-opacity flex items-center gap-3 w-fit"
+              style={{ fontFamily: "'Arapey', serif" }}
+            >
+              <Mail className="w-5 h-5 md:w-6 md:h-6 xl:w-8 xl:h-8" />
+              <span>[Hire me]</span>
+            </Link>
+            <button
+              onClick={() => setResumeOpen(true)}
+              className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-light opacity-70 hover:opacity-100 transition-opacity flex items-center gap-3 w-fit"
+              style={{ fontFamily: "'Arapey', serif" }}
+            >
+              <FileText className="w-5 h-5 md:w-6 md:h-6 xl:w-8 xl:h-8" />
+              <span>[Open Resume]</span>
+            </button>
+            <a
+              href="https://github.com/reykhambhaita"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-light opacity-70 hover:opacity-100 transition-opacity flex items-center gap-3 w-fit"
+              style={{ fontFamily: "'Arapey', serif" }}
+            >
+              <Github className="w-5 h-5 md:w-6 md:h-6 xl:w-8 xl:h-8" />
+              <span>[Open GitHub]</span>
+            </a>
           </nav>
         </div>
       </div>
 
+      {/* Mobile Connect Panel (Hidden on md and up) */}
+      <div className="md:hidden w-full mt-12 flex flex-col px-2">
+        <h2
+          className="text-3xl font-light italic border-b pb-4 w-full"
+          style={{ fontFamily: "'Arapey', serif", borderColor: dividerColor }}
+        >
+          Connect~
+        </h2>
+        <nav className="flex flex-col mt-4">
+          <Link
+            href="/#contact"
+            className={`w-full flex items-center gap-3 py-3 px-4 font-light text-xl transition-colors duration-200 border-b ${isDark ? "hover:bg-white hover:text-black border-white/10" : "hover:bg-black hover:text-white border-black/10"}`}
+            style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+          >
+            <Mail className="w-5 h-5 opacity-70" />
+            <span>Hire me</span>
+          </Link>
+          <button
+            onClick={() => setResumeOpen(true)}
+            className={`w-full flex items-center gap-3 py-3 px-4 font-light text-xl transition-colors duration-200 border-b text-left ${isDark ? "hover:bg-white hover:text-black border-white/10" : "hover:bg-black hover:text-white border-black/10"}`}
+            style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+          >
+            <FileText className="w-5 h-5 opacity-70" />
+            <span>Open Resume</span>
+          </button>
+          <a
+            href="https://github.com/reykhambhaita"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`w-full flex items-center gap-3 py-3 px-4 font-light text-xl transition-colors duration-200 ${isDark ? "hover:bg-white hover:text-black" : "hover:bg-black hover:text-white"}`}
+            style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+          >
+            <Github className="w-5 h-5 opacity-70" />
+            <span>Open GitHub</span>
+          </a>
+        </nav>
+      </div>
+
+      <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
     </div>
   );
 }

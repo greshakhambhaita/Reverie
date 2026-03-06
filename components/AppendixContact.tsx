@@ -61,7 +61,7 @@ export default function AppendixContact() {
 
   const contactLinks = [
     { label: "Email", value: "greshakhambhaita@gmail.com", href: "mailto:greshakhambhaita@gmail.com" },
-    { label: "GitHub", value: "github.com/reykhambhaita", href: "https://github.com/reykhambhaita" },
+    { label: "GitHub", value: "github.com/greshakhambhaita", href: "https://github.com/greshakhambhaita" },
     { label: "LinkedIn", value: "linkedin.com/in/gresha-khambhaita", href: "https://linkedin.com/in/gresha-khambhaita" },
     { label: "Cal.com", value: "cal.com/gresha-khambhaita", href: "https://cal.com/gresha-khambhaita" },
     { label: "Location", value: "Available for remote work", href: "#" },
@@ -192,7 +192,8 @@ export default function AppendixContact() {
                     onChange={(e) => setFormData({ ...formData, filedBy: e.target.value })}
                     required
                     disabled={isSubmitting}
-                    className="border-b bg-transparent outline-none py-1.5 text-xl md:text-2xl font-light focus:border-opacity-100 transition-colors"
+                    placeholder="your name"
+                    className="border-b bg-transparent outline-none py-1.5 text-xl md:text-2xl font-light focus:border-opacity-100 transition-colors placeholder:opacity-30"
                     style={{ borderColor: dividerColor, fontFamily: "'Arapey', serif" }}
                   />
                 </div>
@@ -204,7 +205,8 @@ export default function AppendixContact() {
                     onChange={(e) => setFormData({ ...formData, returnAddress: e.target.value })}
                     required
                     disabled={isSubmitting}
-                    className="border-b bg-transparent outline-none py-1.5 text-lg md:text-xl font-light focus:border-opacity-100 transition-colors"
+                    placeholder="your email"
+                    className="border-b bg-transparent outline-none py-1.5 text-lg md:text-xl font-light focus:border-opacity-100 transition-colors placeholder:opacity-30"
                     style={{ borderColor: dividerColor, fontFamily: "'Arapey', serif" }}
                   />
                 </div>
@@ -215,7 +217,8 @@ export default function AppendixContact() {
                     onChange={(e) => setFormData({ ...formData, statement: e.target.value })}
                     required
                     disabled={isSubmitting}
-                    className="border-b bg-transparent outline-none py-1.5 text-xl md:text-2xl font-light resize-none focus:border-opacity-100 transition-colors"
+                    placeholder="nature of inquiry"
+                    className="border-b bg-transparent outline-none py-1.5 text-xl md:text-2xl font-light resize-none focus:border-opacity-100 transition-colors placeholder:opacity-30"
                     rows={1}
                     style={{ borderColor: dividerColor, fontFamily: "'Arapey', serif" }}
                   />

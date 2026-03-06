@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const tabs = [
-  { name: "Home", href: "/#", sectionId: "" },
+  { name: "Home", href: "/#", sectionId: "hero" },
   { name: "Projects", href: "/#projects", sectionId: "projects" },
   { name: "About", href: "/#about", sectionId: "about" },
   { name: "Contact", href: "/#contact", sectionId: "contact" },
@@ -15,30 +15,50 @@ export default function SideNav() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Track which section is in view
   useEffect(() => {
-    const sectionIds = ["projects", "about", "contact"];
+    const sectionIds = ["hero", "projects", "about", "contact"];
     const observers: IntersectionObserver[] = [];
 
-    const visibleSections = new Map<string, boolean>();
+    const visibleRatios = new Map<string, number>();
+
+    const updateActiveSection = () => {
+      let maxRatio = 0;
+      let mostVisible = "hero";
+
+      sectionIds.forEach((id) => {
+        const ratio = visibleRatios.get(id) || 0;
+        if (ratio > maxRatio) {
+          maxRatio = ratio;
+          mostVisible = id;
+        }
+      });
+
+      const idx = sectionIds.indexOf(mostVisible);
+      if (idx !== -1) {
+        setActiveIndex(idx);
+      }
+    };
 
     sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
+      const el = id === "hero" ? document.querySelector("h1")?.parentElement?.parentElement : document.getElementById(id);
       if (!el) return;
 
       const observer = new IntersectionObserver(
         ([entry]) => {
-          visibleSections.set(id, entry.isIntersecting);
-
-          const activeSection = sectionIds.find((s) => visibleSections.get(s));
-          if (activeSection) {
-            setActiveIndex(sectionIds.indexOf(activeSection) + 1);
-          } else {
-            setActiveIndex(0);
-          }
+          visibleRatios.set(id, entry.intersectionRatio);
+          updateActiveSection();
         },
-        { threshold: 0.3 }
+        {
+          // Use multiple thresholds to get more frequent ratio updates
+          threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+        }
       );
 
       observer.observe(el);
@@ -48,6 +68,8 @@ export default function SideNav() {
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
+  if (!isMounted) return null;
+
   const strokeColor = isDark ? "#a1a1aa" : "#333333";
   const textColor = isDark ? "text-zinc-300" : "text-zinc-800";
   const activeTextColor = isDark ? "text-white" : "text-black";
@@ -56,8 +78,8 @@ export default function SideNav() {
   // SVG dimensions for vertical layout (right side)
   const W = 80;
   const H = 800; // Represents the relative height proportions
-  const restLeftX = 40; // The resting tab starts at x=35
-  const activeLeftX = 30; // The active tab comes out to x=15
+  const restLeftX = 40; // The resting tab starts at x=40
+  const activeLeftX = 30; // The active tab comes out further to x=20 (was 30)
   const notchX = W - 6; // base line is on the right
   const r = 10;
   const startY = 100; // brought down by 40px

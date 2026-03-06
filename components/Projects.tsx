@@ -3,6 +3,8 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { PROJECTS } from "@/data/PROJECTS";
 import Image from "next/image";
+import { useState } from "react";
+import ViewCase from "./ViewCase";
 
 export interface Project {
   id: string;
@@ -40,9 +42,11 @@ export interface Project {
 export function ProjectCard({
   project,
   className = "",
+  onReadCaseAction,
 }: {
   project: Project;
   className?: string;
+  onReadCaseAction: (project: Project) => void;
 }) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -59,6 +63,7 @@ export function ProjectCard({
           {project.numeral}. {project.title}
         </h3>
         <button
+          onClick={() => onReadCaseAction(project)}
           className="text-base md:text-lg lg:text-xl font-light opacity-70 hover:opacity-100 transition-opacity whitespace-nowrap ml-4"
           style={{ fontFamily: "'Arapey', serif" }}
         >
@@ -134,6 +139,16 @@ export function ProjectsList() {
   const [p1, p2, p3] = PROJECTS;
   const dividerColor = isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)";
 
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const handleReadCase = (project: Project) => {
+    setSelectedProject(project);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProject(null);
+  };
+
   return (
     <section id="projects" className={`min-h-screen flex flex-col items-center justify-center px-6 md:px-12 lg:px-24 py-12 transition-colors duration-300 ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
       <div
@@ -158,26 +173,32 @@ export function ProjectsList() {
             className="text-lg md:text-xl lg:text-2xl font-light italic opacity-70 max-w-xl leading-relaxed"
             style={{ fontFamily: "'Source Sans 3', sans-serif" }}
           >
-            &ldquo;These projects started as exercises in understanding systems. They taught me how to think like both the developer and the user.&rdquo;
+            &ldquo;These projects began as structured explorations in interface architecture and interaction design. Each one refined my approach to clarity, feedback, and constraint.&rdquo;
           </p>
         </div>
 
         {/* Quadrant 2: Project 1 */}
-        <div className="">
-          {p1 && <ProjectCard project={p1} />}
+        <div>
+          {p1 && <ProjectCard project={p1} onReadCaseAction={handleReadCase} />}
         </div>
 
         {/* Quadrant 3: Project 2 */}
-        <div className="">
-          {p2 && <ProjectCard project={p2} />}
+        <div>
+          {p2 && <ProjectCard project={p2} onReadCaseAction={handleReadCase} />}
         </div>
 
 
         {/* Quadrant 4: Project 3 */}
-        <div className="">
-          {p3 && <ProjectCard project={p3} />}
+        <div>
+          {p3 && <ProjectCard project={p3} onReadCaseAction={handleReadCase} />}
         </div>
       </div>
+
+      <ViewCase
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={handleCloseModal}
+      />
     </section>
   );
 }

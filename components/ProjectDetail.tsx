@@ -85,7 +85,7 @@ export default function ProjectDetail({ project, onClose }: ProjectDetailProps) 
           <div className="w-16 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-700 cursor-grab active:cursor-grabbing" />
           <button
             onClick={onClose}
-            className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+            className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
           >
             <X size={24} />
           </button>

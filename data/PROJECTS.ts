@@ -21,8 +21,8 @@ export const PROJECTS: Project[] = [
     mainImage: "/images/image1.jpeg",
     type: "Mobile App",
     role: "Full-stack dev",
-    timeline: "Q3-Q4 2024",
-    status: "Prototype",
+    timeline: "4 months (2025)",
+    status: "Prototype (APK Build)",
     repoUrl: "https://github.com/reykhambhaita/orb",
     citation: {
       author: "Khambhaita, G.",
@@ -57,8 +57,8 @@ export const PROJECTS: Project[] = [
     mainImage: "/images/image3.png",
     type: "Web App",
     role: "Full-stack dev",
-    timeline: "Q1 2024",
-    status: "Prototype",
+    timeline: "2 weeks (2025)",
+    status: "Production Ready",
     repoUrl: "https://github.com/reykhambhaita/oriel",
     citation: {
       author: "Khambhaita, G.",
@@ -93,8 +93,8 @@ export const PROJECTS: Project[] = [
     mainImage: "/images/image2.png",
     type: "Web App / AI Platform",
     role: "Full-stack dev",
-    timeline: "Q2 2024",
-    status: "Iteration 2",
+    timeline: "2 months (2025)",
+    status: "Production Ready",
     repoUrl: "https://github.com/reykhambhaita/solace",
     citation: {
       author: "Khambhaita, G.",
