@@ -70,7 +70,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 Gresha Khambhaita
               </h1>
               <p className="text-xl md:text-2xl font-light italic opacity-80" style={{ fontFamily: "'Arapey', serif" }}>
-                Rajkot, Gujarat • +91 88490 35731 • greshakhambhaita@gmail.com
+                Rajkot, Gujarat • greshakhambhaita@gmail.com
               </p>
             </div>
             <a
