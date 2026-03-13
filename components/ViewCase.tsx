@@ -427,6 +427,41 @@ const ViewCase = ({ project, isOpen, onClose }: ViewCaseProps) => {
             >
               GitHub →
             </a>
+
+            {project.liveDemoUrl && (
+              <a
+                href={project.liveDemoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] tracking-[0.13em] uppercase px-5 py-2.5 transition-opacity hover:opacity-70 border"
+                style={{
+                  fontFamily: "'Source Sans 3', sans-serif",
+                  background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+                  borderColor: borderColor,
+                  color: isDark ? "white" : "black",
+                }}
+              >
+                Live Demo →
+              </a>
+            )}
+
+            {project.downloadUrl && (
+              <a
+                href={project.downloadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] tracking-[0.13em] uppercase px-5 py-2.5 transition-opacity hover:opacity-70 border"
+                style={{
+                  fontFamily: "'Source Sans 3', sans-serif",
+                  background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+                  borderColor: borderColor,
+                  color: isDark ? "white" : "black",
+                }}
+              >
+                Download APK →
+              </a>
+            )}
+
             <span
               className="ml-auto text-sm font-normal italic opacity-50"
               style={{ fontFamily: "'Arapey', serif" }}

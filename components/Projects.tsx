@@ -36,6 +36,8 @@ export interface Project {
   solution?: string;
   implementation?: string;
   intent?: string;
+  liveDemoUrl?: string;
+  downloadUrl?: string;
 }
 
 
@@ -88,13 +90,33 @@ export function ProjectCard({
         <div
           className="px-4 py-8 flex items-center justify-center relative group"
         >
-          <div className="w-32 h-32 md:w-40 md:h-40 relative">
+          <a 
+            href={project.liveDemoUrl || project.downloadUrl || project.repoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-32 h-32 md:w-40 md:h-40 relative block cursor-pointer"
+          >
             <Image
               src={isDark ? project.darkIcon : project.lightIcon}
               alt={project.title}
               fill
-              className="object-contain transition-transform duration-300 group-hover:scale-110"
+              className="object-contain transition-transform duration-300 group-hover:scale-105"
             />
+          </a>
+
+          {/* Tooltip */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto z-10 w-max">
+            <div className={`px-3 py-2 border shadow-xl flex gap-3 backdrop-blur-md ${isDark ? "bg-black/80 border-white/20" : "bg-white/80 border-black/20"}`}>
+              {project.liveDemoUrl && (
+                <a href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer" className="text-xs hover:underline uppercase tracking-wider">Demo</a>
+              )}
+              {project.downloadUrl && (
+                <a href={project.downloadUrl} target="_blank" rel="noopener noreferrer" className="text-xs hover:underline uppercase tracking-wider">Download</a>
+              )}
+              <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="text-xs hover:underline uppercase tracking-wider">GitHub</a>
+            </div>
+            {/* Tooltip Arrow */}
+            <div className={`w-2 h-2 rotate-45 border-r border-b ${isDark ? "bg-black/80 border-white/20" : "bg-white/80 border-black/20"}`} style={{ marginTop: "-5px" }} />
           </div>
         </div>
       </div>

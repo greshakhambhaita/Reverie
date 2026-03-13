@@ -36,6 +36,7 @@ export const PROJECTS: Project[] = [
     solution: "A mobile-first platform that instantly connects stranded drivers with a network of verified mechanics, providing real-time tracking and transparent pricing.",
     implementation: "Built with React Native for cross-platform reliability, using a Node.js backend to handle real-time geospatial matching between users and service providers.",
     intent: "To transform the high-friction experience of roadside assistance into a predictable, calm, and reliable digital service.",
+    downloadUrl: "https://github.com/greshakhambhaita/Orb/releases/tag/v1.0",
   },
   {
     id: "oriel",
@@ -72,6 +73,7 @@ export const PROJECTS: Project[] = [
     solution: "A streamlined digital ecosystem that automates the ordering and billing cycle, allowing staff to focus on quality service while the system handles the data.",
     implementation: "Leverages a React-based SPA for the dashboard with a robust MongoDB schema to track order states and inventory in real-time.",
     intent: "To demonstrate how minimal interaction design can significantly increase operational throughput in high-velocity hospitality environments.",
+    liveDemoUrl: "https://oriel-gk.vercel.app/",
   },
   {
     id: "solace",
