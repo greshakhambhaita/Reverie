@@ -150,8 +150,7 @@ export default function ReverieHero() {
   const paragraphContainerRef = useRef<HTMLDivElement>(null);
 
   const isInView = useInView(paragraphContainerRef, {
-    amount: "all",
-    // We want it to be "gone" when not in view, and "back" when fully in view.
+    amount: 0.2, // Trigger when 20% is in view, instead of "all"
   });
 
   const dividerColor = isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)";
@@ -160,8 +159,8 @@ export default function ReverieHero() {
   useEffect(() => {
     setIsMounted(true);
 
-    // Check for large screen (min-width: 1024px)
-    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    // Check for medium screen or larger (min-width: 768px)
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
     setIsLargeScreen(mediaQuery.matches);
 
     const handler = (e: MediaQueryListEvent) => setIsLargeScreen(e.matches);
@@ -205,11 +204,11 @@ export default function ReverieHero() {
                 className="text-2xl leading-relaxed font-light"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
               >
-                I’m an <span ref={gradTextRef}>independent full-stack developer</span> designing and shipping <span className="px-1.5 py-0.5 rounded-sm">end-to-end</span> software systems. I focus on{" "}
-                <span className="px-1.5 py-0.5 rounded-sm">front-end development</span>,{" "}
-                <span className="px-1.5 py-0.5 rounded-sm">UI clarity</span>,{" "}
+                I’m an <span ref={gradTextRef}>independent full-stack developer</span> designing and shipping <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>end-to-end</span> software systems. I focus on{" "}
+                <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>front-end development</span>,{" "}
+                <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>UI clarity</span>,{" "}
                 and the structural decisions that make complex interfaces feel simple. Reverie highlights projects where I’ve built and delivered{" "}
-                <span className="px-1.5 py-0.5 rounded-sm">complete features across web and mobile</span>.
+                <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>complete features across web and mobile</span>.
               </p>
             </div>
 
@@ -277,11 +276,11 @@ export default function ReverieHero() {
               className="text-lg sm:text-2xl md:text-3xl xl:text-4xl leading-relaxed font-light line-clamp-4 sm:line-clamp-none"
               style={{ fontFamily: "'Source Sans 3', sans-serif" }}
             >
-              I’m an <span ref={gradTextRef}>independent full-stack developer</span> designing and shipping <span className="px-1.5 py-0.5 rounded-sm">end-to-end</span> software systems. I focus on{" "}
-              <span className="px-1.5 py-0.5 rounded-sm">front-end development</span>,{" "}
-              <span className="px-1.5 py-0.5 rounded-sm">UI clarity</span>,{" "}
+              I’m an <span ref={gradTextRef}>independent full-stack developer</span> designing and shipping <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>end-to-end</span> software systems. I focus on{" "}
+              <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>front-end development</span>,{" "}
+              <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>UI clarity</span>,{" "}
               and the structural decisions that make complex interfaces feel simple. Reverie highlights projects where I’ve built and delivered{" "}
-              <span className="px-1.5 py-0.5 rounded-sm">complete features across web and mobile</span>.
+              <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>complete features across web and mobile</span>.
             </p>
 
             {/* Rough circle SVG overlay - Only on large screens */}
