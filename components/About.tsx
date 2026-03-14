@@ -5,8 +5,12 @@ import { useTheme } from "@/contexts/ThemeContext";
 const fields = [
   { label: "Alias", value: "Gresha Khambhaita" },
   { label: "Primary Directive", value: "Engineer, Designer, Analyst" },
-  { label: "Location Status", value: "Remote Repository" },
-  { label: "Operating Systems", value: "React, Next.js, TypeScript, Node" },
+  { label: "Location", value: "Rajkot, India" },
+  { label: "Availability", value: "Open to full-time roles", showsDot: true },
+  { label: "Languages", value: "Python, JavaScript, HTML/CSS" },
+  { label: "Stack", value: "React Native, Node.js, Tailwind, Express" },
+  { label: "Data", value: "MongoDB, PostgreSQL" },
+  { label: "Tooling", value: "Git, Figma, Postman" },
 ];
 
 export default function About() {
@@ -27,9 +31,9 @@ export default function About() {
           className="grid grid-cols-1 xl:grid-cols-[5fr_5fr] gap-12 xl:gap-24 lg:border lg:p-12 xl:p-16"
           style={{ borderColor: dividerColor }}
         >
-          {/* Left Column — Header and Illustration */}
+          {/* Left Column — Header and Dossier */}
           <div
-            className="flex flex-col items-start justify-between xl:pr-24 xl:border-r border-b xl:border-b-0 pb-16 xl:pb-0"
+            className="flex flex-col items-start xl:pr-24 xl:border-r border-b xl:border-b-0 pb-16 xl:pb-0"
             style={{ borderColor: dividerColor }}
           >
             {/* Title block */}
@@ -48,46 +52,12 @@ export default function About() {
               </p>
             </div>
 
-            {/* Illustration */}
-            <div className="grow flex items-center justify-center w-full mt-12 md:mt-24">
-              <img
-                src="/images/about_crow.jpeg"
-                alt="Crow Illustration"
-                className="w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto opacity-75 transition-all duration-300 hover:scale-105"
-                style={{ filter: "none" }}
-              />
-            </div>
-          </div>
-
-          {/* Right Column */}
-          <div className="flex flex-col justify-between space-y-12">
-
-            {/* Body copy */}
-            <div className="flex flex-col space-y-6">
-              <p
-                className="text-lg md:text-xl lg:text-2xl leading-relaxed font-light opacity-90"
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-              >
-                I am a software engineer grad with a distinct focus on the intersection of
-                systematic logic and aesthetic execution. My practice resides where disciplined
-                architecture meets experimental expression.
-              </p>
-              <p
-                className="text-lg md:text-xl lg:text-2xl leading-relaxed font-light opacity-90"
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-              >
-                I believe interfaces should not merely display information, but orchestrate
-                interaction. The tools and applications I construct prioritize structural
-                integrity, nuanced feedback, and absolute typographic restraint.
-              </p>
-            </div>
-
             {/* Dossier fields — ruled, no card box */}
-            <div className="flex flex-col">
+            <div className="flex flex-col w-full">
               {fields.map((item, i) => (
                 <div
                   key={item.label}
-                  className="group flex flex-col space-y-1 py-5 border-t transition-opacity duration-200"
+                  className="group flex flex-col space-y-1 py-3 border-t transition-opacity duration-200"
                   style={{
                     borderTopColor: dividerColor,
                     borderBottomWidth: i === fields.length - 1 ? "1px" : "0px",
@@ -101,16 +71,51 @@ export default function About() {
                   >
                     {item.label}
                   </span>
-                  <span
-                    className="text-xl md:text-2xl font-light italic opacity-90"
-                    style={{ fontFamily: "'Arapey', serif" }}
-                  >
-                    {item.value}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    {item.showsDot && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+                    )}
+                    <span
+                      className="text-lg font-light italic opacity-90"
+                      style={{ fontFamily: "'Arapey', serif" }}
+                    >
+                      {item.value}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
+          </div>
 
+          {/* Right Column */}
+          <div className="flex flex-col space-y-12 xl:pt-16">
+            {/* Illustration */}
+            <div className="flex items-center justify-center w-full">
+              <img
+                src="/images/about_crow.jpeg"
+                alt="Crow Illustration"
+                className="w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto opacity-75 transition-all duration-300 hover:scale-105"
+                style={{ filter: "none" }}
+              />
+            </div>
+
+            {/* Body copy */}
+            <div className="flex flex-col space-y-6">
+              <p
+                className="text-lg md:text-xl lg:text-2xl leading-relaxed font-light opacity-90"
+                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+              >
+
+
+
+                I'm a full-stack developer who thinks just as hard about the decisions behind the code as the code itself — the architecture, the interaction, the small thing that makes an interface feel right instead of just functional.              </p>
+              <p
+                className="text-lg md:text-xl lg:text-2xl leading-relaxed font-light opacity-90"
+                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+              >
+
+                The user is always the measure. Not a box to check, but the actual reason any of it matters. That's what I come back to on every project, from the structure down to the last detail on screen.              </p>
+            </div>
           </div>
         </div>
 

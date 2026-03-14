@@ -45,8 +45,11 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
       />
 
       <div
-        className={`relative w-full max-w-6xl md:max-w-[calc(100vw-120px)] lg:max-w-[calc(100vw-160px)] h-full max-h-[90vh] border shadow-sm flex flex-col ${isDark ? "bg-black border-white/20 text-white" : "bg-white border-black/20 text-black"
-          }`}
+        className={`relative w-full max-w-6xl md:max-w-[calc(100vw-120px)] lg:max-w-[calc(100vw-160px)] h-full max-h-[90vh] flex flex-col ${
+          isDark 
+            ? "bg-black text-white shadow-[0_0_80px_rgba(255,255,255,0.03)]" 
+            : "bg-white text-black shadow-[0_0_80px_rgba(0,0,0,0.08)]"
+        }`}
         onClick={(e) => e.stopPropagation()}
         style={{ borderRadius: "0" }}
       >

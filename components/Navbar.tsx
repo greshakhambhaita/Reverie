@@ -109,29 +109,36 @@ export default function Navbar() {
       </nav>
 
       {/* Separate Hamburger Menu Button Container (Mobile only) */}
-      <div className="fixed top-20 right-6 md:hidden z-[101]">
+      <div className="fixed top-20 right-6 md:hidden z-102">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`p-1 transition-all duration-300 ${iconColor}`}
+          className={`
+            w-12 h-12 flex items-center justify-center transition-all duration-150 rounded-full backdrop-blur-md
+            ${isDark 
+              ? "bg-white/5 text-white" 
+              : "bg-black/1 text-black"
+            }
+          `}
           aria-label="Toggle menu"
         >
           <div className="flex flex-col gap-1.5 w-6 items-end">
-            <span className={`h-[1px] bg-current transition-all duration-300 ${isMenuOpen ? "w-6 rotate-45 translate-y-[7px]" : "w-6"}`} />
-            <span className={`h-[1px] bg-current transition-all duration-300 ${isMenuOpen ? "opacity-0" : "w-4"}`} />
-            <span className={`h-[1px] bg-current transition-all duration-300 ${isMenuOpen ? "w-6 -rotate-45 -translate-y-[7px]" : "w-5"}`} />
+            <span className={`h-px bg-current transition-all duration-150 ${isMenuOpen ? "w-6 rotate-45 translate-y-[7px]" : "w-6"}`} />
+            <span className={`h-px bg-current transition-all duration-150 ${isMenuOpen ? "opacity-0" : "w-4"}`} />
+            <span className={`h-px bg-current transition-all duration-150 ${isMenuOpen ? "w-6 -rotate-45 -translate-y-[7px]" : "w-5"}`} />
           </div>
         </button>
       </div>
 
       {/* Mobile Glassmorphism Menu */}
       <div
-        className={`fixed top-32 right-6 w-48 z-[90] md:hidden transition-all duration-500 ease-in-out transform ${isMenuOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-4 pointer-events-none"
-          }`}
+        className={`fixed top-36 right-6 w-48 z-101 md:hidden transition-all duration-150 ease-out transform ${
+          isMenuOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-4 pointer-events-none"
+        }`}
       >
         <div className={`
-          p-2 border backdrop-blur-xl rounded-sm
-          ${isDark ? "bg-black/40 border-white/10" : "bg-white/40 border-black/10"}
-          shadow-2xl overflow-hidden
+          p-2 border backdrop-blur-2xl rounded-sm
+          ${isDark ? "bg-black/20 border-white/10" : "bg-white/20 border-black/10"}
+          shadow-[0_8px_32px_rgba(0,0,0,0.12)] overflow-hidden
         `}>
           <div className="flex flex-col">
             {navLinks.map((link) => (
@@ -156,7 +163,7 @@ export default function Navbar() {
       {/* Backdrop for closing menu */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 z-[80] md:hidden"
+          className="fixed inset-0 z-80 md:hidden"
           onClick={() => setIsMenuOpen(false)}
         />
       )}

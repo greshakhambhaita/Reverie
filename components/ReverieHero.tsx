@@ -120,7 +120,7 @@ function AnimatedPath({
         strokeDasharray: len,
         strokeDashoffset: animate ? 0 : len,
         transition: animate
-          ? "stroke-dashoffset 0.9s cubic-bezier(0.4,0,0.2,1)"
+          ? "stroke-dashoffset 1.8s cubic-bezier(0.4,0,0.2,1)"
           : "none",
       }
       : { opacity: 0 };
@@ -204,7 +204,7 @@ export default function ReverieHero() {
                 className="text-2xl leading-relaxed font-light"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
               >
-                I’m an <span ref={gradTextRef}>independent full-stack developer</span> designing and shipping <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>end-to-end</span> software systems. I focus on{" "}
+                I’m a <span ref={gradTextRef}> full-stack developer</span> designing and shipping <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>end-to-end</span> software systems. I focus on{" "}
                 <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>front-end development</span>,{" "}
                 <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>UI clarity</span>,{" "}
                 and the structural decisions that make complex interfaces feel simple. Reverie highlights projects where I’ve built and delivered{" "}
@@ -276,7 +276,7 @@ export default function ReverieHero() {
               className="text-lg sm:text-2xl md:text-3xl xl:text-4xl leading-relaxed font-light line-clamp-4 sm:line-clamp-none"
               style={{ fontFamily: "'Source Sans 3', sans-serif" }}
             >
-              I’m an <span ref={gradTextRef}>independent full-stack developer</span> designing and shipping <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>end-to-end</span> software systems. I focus on{" "}
+              I’m a<span ref={gradTextRef}> full-stack developer</span> designing and shipping <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>end-to-end</span> software systems. I focus on{" "}
               <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>front-end development</span>,{" "}
               <span className={`px-1.5 py-0.5 rounded-sm ${isDark ? "bg-white/10" : "bg-black/10"}`}>UI clarity</span>,{" "}
               and the structural decisions that make complex interfaces feel simple. Reverie highlights projects where I’ve built and delivered{" "}

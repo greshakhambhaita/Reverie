@@ -68,10 +68,11 @@ const ViewCase = ({ project, isOpen, onClose }: ViewCaseProps) => {
 
       {/* Modal */}
       <div
-        className={`relative w-full md:max-w-4xl lg:max-w-[1400px] h-full max-h-[90vh] overflow-y-auto border shadow-2xl flex flex-col ${isDark
-          ? "bg-[#0a0a0a] border-white/10 text-white"
-          : "bg-white border-black/10 text-black"
-          }`}
+        className={`relative w-full md:max-w-4xl lg:max-w-[1400px] h-full max-h-[90vh] overflow-y-auto flex flex-col ${
+          isDark
+            ? "bg-[#0a0a0a] text-white shadow-[0_0_80px_rgba(255,255,255,0.03)]"
+            : "bg-white text-black shadow-[0_0_80px_rgba(0,0,0,0.08)]"
+        }`}
         onClick={(e) => e.stopPropagation()}
         style={{ borderRadius: 0 }}
       >
@@ -177,8 +178,8 @@ const ViewCase = ({ project, isOpen, onClose }: ViewCaseProps) => {
                 <div 
                   className={`relative w-full overflow-hidden shadow-2xl rounded-sm border shrink-0 bg-black/5 dark:bg-white/5 transition-all duration-300 ${
                     project.id === "orb" 
-                      ? "aspect-[9/16] md:w-[25%] lg:w-[22%]" 
-                      : "aspect-video md:aspect-[4/3] md:w-[40%] lg:w-[35%]"
+                      ? "aspect-9/16 md:w-[25%] lg:w-[22%]" 
+                      : "aspect-video md:aspect-4/3 md:w-[40%] lg:w-[35%]"
                   }`} 
                   style={{ borderColor }}
                 >
@@ -258,7 +259,7 @@ const ViewCase = ({ project, isOpen, onClose }: ViewCaseProps) => {
               {["Full-Stack", "Solo Project"].map((tag) => (
                 <span
                   key={tag}
-                  className="text-[11px] tracking-[0.1em] uppercase px-3 py-1.5"
+                  className="text-[11px] tracking-widest uppercase px-3 py-1.5"
                   style={{
                     fontFamily: "'Source Sans 3', sans-serif",
                     background: isDark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.85)",
@@ -272,7 +273,7 @@ const ViewCase = ({ project, isOpen, onClose }: ViewCaseProps) => {
               {[project.type, ...project.techStack].map((tag) => (
                 <span
                   key={tag}
-                  className="text-[11px] tracking-[0.1em] uppercase px-3 py-1.5 border"
+                  className="text-[11px] tracking-widest uppercase px-3 py-1.5 border"
                   style={{
                     fontFamily: "'Source Sans 3', sans-serif",
                     background: tagBg,
