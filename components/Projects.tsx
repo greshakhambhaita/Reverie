@@ -3,6 +3,7 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { PROJECTS } from "@/data/PROJECTS";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import ViewCase from "./ViewCase";
 
@@ -197,6 +198,16 @@ export function ProjectsList() {
           >
             &ldquo;These projects began as structured explorations in interface architecture and interaction design. Each one refined my approach to clarity, feedback, and constraint.&rdquo;
           </p>
+          <div className="pt-4">
+            <Link 
+              href="/projects" 
+              className="text-xl md:text-2xl font-light opacity-70 hover:opacity-100 transition-all hover:translate-x-1 inline-flex items-center gap-2"
+              style={{ fontFamily: "'Arapey', serif" }}
+            >
+              [See all projects]
+              <span className="text-lg">→</span>
+            </Link>
+          </div>
         </div>
 
         {/* Quadrant 2: Project 1 */}

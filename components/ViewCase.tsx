@@ -49,6 +49,8 @@ const ViewCase = ({ project, isOpen, onClose }: ViewCaseProps) => {
       return ["#444444", "#d4d4d4", "#722f37", "#262626", "#a3a3a3", "#581c23"][i % 6];
     } else if (project.id === "solace") {
       return ["#5b21b6", "#2563eb", "#1e40af", "#7c3aed", "#3b82f6"][i % 5];
+    } else if (project.id === "layr") {
+      return ["#ff3e00", "#646cff", "#38b2ac", "#6366f1", "#444444"][i % 5];
     }
     return `rgba(${isDark ? "212,212,212" : "68,68,68"}, ${0.8 - i * (0.8 / count)})`;
   };
