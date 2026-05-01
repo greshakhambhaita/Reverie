@@ -465,12 +465,6 @@ const ViewCase = ({ project, isOpen, onClose }: ViewCaseProps) => {
               </a>
             )}
 
-            <span
-              className="ml-auto text-sm font-normal italic opacity-50"
-              style={{ fontFamily: "'Arapey', serif" }}
-            >
-              Built independently, {project.citation?.year || "2024"}
-            </span>
           </div>
 
         </div>
