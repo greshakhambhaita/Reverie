@@ -91,7 +91,7 @@ export function ProjectCard({
         <div
           className="px-4 py-8 flex items-center justify-center relative group"
         >
-          <a 
+          <a
             href={project.liveDemoUrl || project.downloadUrl || project.repoUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -180,7 +180,7 @@ export function ProjectsList() {
 
         {/* Quadrant 1: Header */}
         <div
-          className="p-6 md:p-10 lg:p-12 flex flex-col justify-center space-y-6 "
+          className="pl-4 flex flex-col justify-center space-y-3 "
           style={{ borderColor: dividerColor }}
         >
 
@@ -198,14 +198,13 @@ export function ProjectsList() {
           >
             &ldquo;These projects began as structured explorations in interface architecture and interaction design. Each one refined my approach to clarity, feedback, and constraint.&rdquo;
           </p>
-          <div className="pt-4">
-            <Link 
-              href="/projects" 
-              className="text-xl md:text-2xl font-light opacity-70 hover:opacity-100 transition-all hover:translate-x-1 inline-flex items-center gap-2"
+          <div>
+            <Link
+              href="/projects"
+              className="text-base sm:text-lg lg:text-2xl font-light italic opacity-100 hover:opacity-60 transition-opacity"
               style={{ fontFamily: "'Arapey', serif" }}
             >
-              [See all projects]
-              <span className="text-lg">→</span>
+              See all projects~
             </Link>
           </div>
         </div>

@@ -40,28 +40,6 @@ export default function AllProjectsPage() {
 
           {/* Projects Grid - Same format as landing page */}
           <div className="grid grid-cols-1 min-[1631px]:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
-            
-            {/* Slot 1: Header */}
-            <div
-              className="p-6 md:p-10 lg:p-12 flex flex-col justify-center space-y-6 "
-              style={{ borderColor: dividerColor }}
-            >
-              <div className="space-y-4">
-                <h1 className="text-6xl md:text-8xl lg:text-[120px] font-normal tracking-tight" style={{ fontFamily: "'Italiana', serif" }}>
-                  Archive
-                </h1>
-                <p className="text-base sm:text-lg lg:text-2xl font-light italic opacity-100" style={{ fontFamily: "'Arapey', serif" }}>
-                  Chapter Two~
-                </p>
-              </div>
-              <p
-                className="text-lg md:text-xl lg:text-2xl font-light italic opacity-70 max-w-xl leading-relaxed"
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-              >
-                &ldquo;A comprehensive catalog of works, ranging from commercial interfaces to experiments in creative engineering.&rdquo;
-              </p>
-            </div>
-
             {PROJECTS.map((project) => (
               <div key={project.id}>
                 <ProjectCard project={project} onReadCaseAction={handleReadCase} />
